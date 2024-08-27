@@ -6,15 +6,13 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
+@AllArgsConstructor
 public enum BoardType {
-
-    @AllArgsConstructor
-    REPORT("신고 게시판"),
-    INQUIRY("문의 게시판"),
+    INQUIRY("신고&문의 게시판"),
     REVIEW("후기 게시판"),
-        BOAST("자랑 게시판"),
-        NOTICE("공지 게시판");
+    BOAST("자랑 게시판"),
+    ANNOUNCEMENT("공지 게시판");
 
-        @Getter
-        private String boardDescription;
+    @Getter
+    private String boardDescription;
 }

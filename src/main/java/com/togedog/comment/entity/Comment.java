@@ -1,15 +1,25 @@
 package com.togedog.comment.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.togedog.board.entity.Board;
 import com.togedog.member.entity.Member;
-import lombok.*;
+import com.togedog.reply.entity.Reply;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Builder;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-@Builder
+
 @AllArgsConstructor
+@Builder
 @NoArgsConstructor
 @Getter
 @Setter
@@ -31,13 +41,18 @@ public class Comment {
     @Enumerated(value = EnumType.STRING)
     private CommentStatus commentStatus = CommentStatus.COMMENT_POST;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "BOARD_ID")
     private Board board;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
+
+    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Reply> replies = new ArrayList<>();
 
     public void update(String comment){
         this.comment = comment;

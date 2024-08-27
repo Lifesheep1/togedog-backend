@@ -10,8 +10,6 @@ import javax.validation.constraints.NotBlank;
 @Entity
 @Getter
 @Setter
-
 @DiscriminatorValue("B")
 public class BoardBoast extends Board {
 }
-

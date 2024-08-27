@@ -11,9 +11,11 @@ import javax.persistence.Enumerated;
 
 @Entity
 @DiscriminatorValue("I")
-@Getter@Setter
-
+@Getter
+@Setter
 public class BoardInquiry extends Board {
+
+    private String statusDescription = BoardInquiryStatus.RECEIVED.getStatusDescription();
 
     @Enumerated(value = EnumType.STRING)
     private BoardInquiryStatus boardInquiryStatus = BoardInquiryStatus.RECEIVED;
@@ -25,5 +27,9 @@ public class BoardInquiry extends Board {
 
         @Getter
         private String statusDescription;
+    }
+    public void setBoardInquiryStatus(BoardInquiryStatus boardInquiryStatus) {
+        this.boardInquiryStatus = boardInquiryStatus;
+        this.statusDescription = boardInquiryStatus.getStatusDescription();
     }
 }
